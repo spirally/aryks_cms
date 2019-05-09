@@ -155,7 +155,10 @@ INSTALLED_APPS = [
     'djangocms_bootstrap4.contrib.bootstrap4_tabs',
     'djangocms_bootstrap4.contrib.bootstrap4_utilities',
     'aryks',
-    # 'infoshop',
+    'mptt',
+    'infoshop',
+    'properties',
+    'filters',
 ]
 
 LANGUAGES = (
@@ -222,3 +225,10 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters'
 )
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'Infoshop'
+}
+
+SHOP_IMAGE_DIR = 'infoshop'
+
