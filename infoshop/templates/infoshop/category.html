@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    !!!-{{ current_category.name }}-!!!
+    {% for c in category_family %}
+        <a href="{% url 'infoshop:by_category' c.slug %}">{{ c.name }}</a> <br>
+    {% endfor %}
+	{% for p in products %}
+        {{ p.name }}<br/>
+{#        <a href="{% url 'product_detail' p.slug %}">{{ p.name }}</a> <br>#}
+	{% endfor %}
+
+{% endblock content %}

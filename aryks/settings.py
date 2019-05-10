@@ -110,10 +110,11 @@ MIDDLEWARE = [
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.language.LanguageCookieMiddleware'
+    'cms.middleware.language.LanguageCookieMiddleware',
 ]
 
 INSTALLED_APPS = [
+    # 'suit',
     'djangocms_admin_style',
     'django.contrib.auth',
     'django.contrib.contenttypes',
