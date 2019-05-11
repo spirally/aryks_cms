@@ -1,0 +1,88 @@
+
+body {
+  font-family: Glober, sans-serif;
+  //font-size: 13px;
+  //line-height: 1.2;
+  //letter-spacing: .13px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wall {
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+  background-size: cover;
+  background-position: top center;
+
+  &.wall-sm {
+    min-height: 300px;
+  }
+
+  &.wall-md {
+    min-height: 400px;
+  }
+
+  &.wall-full {
+    min-height: 100vh;
+    max-height: 999px;
+  }
+}
+
+.masked {
+  position: relative;
+
+  .mask {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    //margin: -25px -2em;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: .25;
+    }
+
+    @each $mask in black-broken-diagonal-lines,
+    black-criss-cross,
+    black-diagonal-lines,
+    black-dots,
+    black-horizontal-lines,
+    black-horizontal-stripes,
+    black-large-checks,
+    black-plus-signs,
+    black-small-checks,
+    black-squares,
+    black-vertical-lines,
+    black-vertical-stripes,
+    black-zig-zag,
+    white-broken-diagonal-lines,
+    white-criss-cross,
+    white-diagonal-lines,
+    white-dots,
+    white-fly-screen,
+    white-horizontal-lines,
+    white-horizontal-stripes,
+    white-large-checks,
+    white-medium-checks,
+    white-plus-signs,
+    white-small-checks,
+    white-squares,
+    white-vertical-lines,
+    white-vertical-stripes,
+    white-zig-zag {
+      &.#{$mask}::before {
+        background: url(../i/mask/#{$mask}.png) 0 0 repeat
+      }
+    }
+
+  }
+}
+

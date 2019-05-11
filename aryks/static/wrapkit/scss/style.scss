@@ -19,10 +19,12 @@ File: scss
  */
 
 @import 'variable';
-@import '../css/animate.css';  
+@import '../css/animate.css';
+@import "fonts.scss";
 @import '../scss/icons/font-awesome/css/font-awesome.min.css'; 
 @import '../scss/icons/simple-line-icons/css/simple-line-icons.css';
-@import '../scss/icons/themify-icons/themify-icons.css'; 
-@import 'app.scss'; 
-@import 'common.scss'; 
-@import 'responsive.scss';     
+@import '../scss/icons/themify-icons/themify-icons.css';
+@import 'app.scss';
+@import 'common.scss';
+@import 'responsive.scss';
+@import "screen.scss";
