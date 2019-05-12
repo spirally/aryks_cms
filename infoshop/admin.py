@@ -86,7 +86,7 @@ class CategoryAdmin(MPTTModelAdmin):
                 'name',
                 'slug',
                 'title',
-                'menutitle',
+                'title_menu',
                 'seo_description',
                 'seo_keywords',
                 'image',
@@ -128,7 +128,7 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': [
                 'name',
                 'title',
-                'menutitle',
+                'title_menu',
                 'category',
                 'slug',
                 'url',

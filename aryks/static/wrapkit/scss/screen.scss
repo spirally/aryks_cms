@@ -1,12 +1,4 @@
 
-body {
-  font-family: Glober, sans-serif;
-  //font-size: 13px;
-  //line-height: 1.2;
-  //letter-spacing: .13px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 .wall {
   min-height: 600px;
@@ -46,7 +38,7 @@ body {
       position: absolute;
       width: 100%;
       height: 100%;
-      z-index: 1;
+      //z-index: 1;
       opacity: .25;
     }
 
@@ -86,3 +78,9 @@ body {
   }
 }
 
+
+@for $i from 1 through 4 {
+  .bg-dark-#{$i * 25} {
+    background-color: rgba($black, .25 * $i);
+  }
+}
