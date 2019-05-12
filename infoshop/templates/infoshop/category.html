@@ -2,10 +2,6 @@
 
 {% block title %}{{ category.title }}{% endblock %}
 
-{% load static %}
-
-{% get_media_prefix as MEDIA_PREFIX %}
-
 {% block content %}
     <div class="wall masked" style="background-image: url({{ MEDIA_URL }}{{ category.image }})">
         <div class="mask black-criss-cross"></div>
