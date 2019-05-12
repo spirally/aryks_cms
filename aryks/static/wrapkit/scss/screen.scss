@@ -21,6 +21,11 @@
     min-height: 100vh;
     max-height: 999px;
   }
+
+  h1 {
+    font-size: 3rem;
+    margin-top: 2rem;
+  }
 }
 
 .masked {
@@ -78,9 +83,307 @@
   }
 }
 
-
 @for $i from 1 through 4 {
   .bg-dark-#{$i * 25} {
     background-color: rgba($black, .25 * $i);
   }
+}
+
+.oko-pcard- {
+  text-align: center;
+}
+
+.oko-pcard-wrap {
+  width: 270px;
+  height: 376px;
+  position: relative;
+  text-align: left;
+  display: inline-block;
+}
+
+.oko-pcard-link {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+}
+
+.oko-pcard-link:hover, .oko-pcard-link:active, .oko-pcard-link:focus {
+  color: #fff;
+}
+
+@media (min-width: 576px) {
+  .oko-pcard-link:hover .oko-pcard-content {
+    top: 20px;
+  }
+  .oko-pcard-link:hover .oko-pcard-desc {
+    opacity: 1;
+  }
+  .oko-pcard-link:hover .oko-pcard-price {
+    opacity: 1;
+  }
+}
+
+.oko-pcard-filter {
+  background: #8FB100;
+  background: -moz-linear-gradient(-45deg, #8FB100 0%, #027F9D 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, #8FB100), color-stop(100%, #027F9D));
+  background: -webkit-linear-gradient(-45deg, #8FB100 0%, #027F9D 100%);
+  background: -o-linear-gradient(-45deg, #8FB100 0%, #027F9D 100%);
+  background: -ms-linear-gradient(-45deg, #8FB100 0%, #027F9D 100%);
+  background: linear-gradient(135deg, #8FB100 0%, #027F9D 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2', GradientType=1);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: 0.4s;
+  opacity: 0.8;
+}
+
+.oko-pcard-link:hover .oko-pcard-filter {
+  opacity: 0.9;
+}
+
+.oko-pcard-content {
+  position: absolute;
+  top: 120px;
+  width: 100%;
+  transition: 0.4s;
+}
+
+.oko-pcard-badges {
+  position: relative;
+  left: -1px;
+  min-height: 30px;
+}
+
+.oko-pcard-badge {
+  padding: 7px 10px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  background: #333333;
+  border-radius: 0 5px 5px 0;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.oko-pcard-badge:last-child {
+  margin-bottom: 0;
+}
+
+.oko-pcard-badge__green {
+  background-color: #97BA02;
+}
+
+.oko-pcard-badge__orange {
+  background-color: #F5A000;
+}
+
+.oko-pcard-badge__yellow {
+  background-color: #FFDA44;
+  color: #000;
+  border-radius: 5px;
+  opacity: 1;
+  transition: 0.4s;
+}
+
+@media (min-width: 576px) {
+  .oko-pcard-link:hover .oko-pcard-badge__yellow {
+    opacity: 0;
+  }
+}
+
+.oko-pcard-title {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 22px;
+  margin-top: 20px;
+}
+
+.oko-pcard-desc {
+  font-size: 12px;
+  padding: 0 22px;
+  margin-top: 16px;
+  opacity: 0;
+  transition: 0.4s;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.oko-pcard-price {
+  font-size: 12px;
+  color: #fff;
+  margin-top: 16px;
+  padding: 0 22px;
+  text-align: right;
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.oko-pcard-price-val {
+  font-size: 13px;
+  font-weight: bold;
+  color: #AEE32D;
+  margin-left: 10px;
+}
+
+.oko-pcard-price-val__default {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.oko-pcard-icons {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+}
+
+.oko-pcard-icon {
+  font-size: 36px;
+  margin-left: 5px;
+}
+
+.oko-pcard-category-18 {
+  font-style: normal;
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  line-height: 28px;
+  border: 2px solid #fff;
+  position: relative;
+  top: -11px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.oko-pcard-author {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-decoration: none;
+  display: flex !important;
+  align-items: center !important;
+  position: absolute;
+  width: 50%;
+  bottom: 20px;
+  left: 20px;
+}
+
+.oko-pcard-author img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.oko-pcard-author-name {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.oko-pcard-company {
+  text-decoration: none;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  font-size: 12px;
+  line-height: 14px;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.oko-pcard-theme {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #FFDA44 !important;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 35%;
+  text-align: right;
+}
+
+.oko-pcard-theme__top {
+  bottom: inherit;
+  top: 70px;
+  opacity: 1;
+  transition: 0.4s;
+}
+
+@media (min-width: 576px) {
+  .oko-pcard-:hover .oko-pcard-theme__top {
+    opacity: 0;
+  }
+}
+
+.oko-pcard-place {
+  font-size: 11px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50%;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+  transition: 0.4s;
+}
+
+@media (min-width: 576px) {
+  .oko-pcard-:hover .oko-pcard-place {
+    opacity: 0;
+  }
+}
+
+.oko-pcard-counts {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #fff;
+  line-height: 24px;
+}
+
+.oko-pcard-counts i {
+  font-size: 14px;
+  margin-right: 2px;
+  width: 20px;
+  text-align: center;
+  display: inline-block;
+}
+
+.oko-pcard-__light .oko-pcard-link {
+  color: #000 !important;
+}
+
+.oko-pcard-__light .oko-pcard-author {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.oko-pcard-__light .oko-pcard-theme {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.oko-pcard-__light .oko-pcard-desc {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.oko-pcard-__light .oko-pcard-price {
+  color: #000;
+}
+
+.oko-pcard-__light .oko-pcard-price-val {
+  color: #000;
+}
+
+.oko-pcard-__light .oko-pcard-price-val__default {
+  color: rgba(0, 0, 0, 0.6);
 }

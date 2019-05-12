@@ -7,6 +7,7 @@ import uuid
 from properties.models import ProductProperty, TypeProperty
 from filters.models import ProductFilter, FilterCategory
 from slugify import slugify
+from colorfield.fields import ColorField
 
 from slytools.utils.db import IsDeletedModel, IsDeletedRestoredModel
 from slytools.utils.web import WebPageMixin, OrderingMixin
@@ -25,7 +26,7 @@ def make_upload_path(instance, filename, prefix=False):
 
 class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
-    description = models.CharField(_("Описание"), blank=True, default="", max_length=1000)
+    description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', verbose_name=_('Родитель'))
     wall = ThumbnailerImageField(
         upload_to=make_upload_path, blank=True, default="", verbose_name=_('Обложка'),
@@ -49,7 +50,7 @@ class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
 
 class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
-    description = models.CharField(_("Описание"), blank=True, default="", max_length=1000)
+    description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
     wall = ThumbnailerImageField(
         upload_to=make_upload_path, blank=True, default="", verbose_name=_('Обложка'),
         resize_source=dict(size=(2560, 2560), crop='scale'),
@@ -63,6 +64,9 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     type_audio = models.BooleanField(default=False, verbose_name=_('Слушать'))
     type_book = models.BooleanField(default=False, verbose_name=_('Читать'))
     type_flow = models.BooleanField(default=False, verbose_name=_('Участвовать'))
+    color0 = ColorField(default='#333333')
+    color1 = ColorField(default='#333333')
+    color2 = ColorField(default='#333333')
 
     def get_filters(self):
         res = {}
@@ -90,7 +94,29 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     pic.short_description = u'Большая картинка'
     pic.allow_tags = True
 
+    def update_palette_by_image(self):
+        def get_hex_color(rate, rgb):
+            return '#' + ''.join('%02X' % i for i in rgb)
+
+        if not self.image:
+            return
+
+        from haishoku.haishoku import Haishoku
+        try:
+            palette = Haishoku.getPalette(self.image.path)
+        except FileNotFoundError:
+            return
+
+        palette.reverse()
+        try:
+            self.color0 = get_hex_color(*palette.pop())
+            self.color1 = get_hex_color(*palette.pop())
+            self.color2 = get_hex_color(*palette.pop())
+        except IndexError:
+            return
+
     def save(self, *args, **kwargs):
+        self.update_palette_by_image()
         if self.category:
             super(Product, self).save(*args, **kwargs)
             # create properties if not exist
@@ -119,7 +145,7 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
 class Offer(OrderingMixin, IsDeletedModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='offers', null=True, verbose_name=_('Инфопродукт'))
     name = models.CharField(_("Название"), default="", max_length=250)
-    description = models.CharField(_("Описание"), blank=True, default="", max_length=1000)
+    description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
     price = models.DecimalField(max_digits=8, decimal_places=2, null=True, default=0.00, verbose_name=_('Цена'))
 
     def __str__(self):

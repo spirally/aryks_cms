@@ -10,7 +10,7 @@ class WebPageMixin(models.Model):
     slug = models.SlugField(_("Slug"), default="", blank=True, db_index=True, max_length=300,)
     url = models.CharField(_("Url"), default="", blank=True, max_length=300)
     seo_keywords = models.CharField(max_length=512, null=True, blank=True, verbose_name=_('SEO ключевые слова'))
-    seo_description = models.TextField(null=True, blank=True, verbose_name=_('SEO описание'))
+    seo_description = models.TextField(max_length=512, null=True, blank=True, verbose_name=_('SEO описание'))
     content = models.TextField(null=True, blank=True, verbose_name=_('Контент'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Создано'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Обновлено'))
