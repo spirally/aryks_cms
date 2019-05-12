@@ -87,9 +87,10 @@ class CategoryAdmin(MPTTModelAdmin):
                 'slug',
                 'title',
                 'title_menu',
+                'wall',
+                'image',
                 'seo_description',
                 'seo_keywords',
-                'image',
                 'parent',
                 'url',
             ]
@@ -132,9 +133,10 @@ class ProductAdmin(admin.ModelAdmin):
                 'category',
                 'slug',
                 'url',
+                'wall',
+                'image',
                 'seo_description',
                 'seo_keywords',
-                'image',
                 'price',
             ]
         }),

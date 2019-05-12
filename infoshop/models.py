@@ -1,4 +1,5 @@
 from django.db import models
+from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
@@ -26,7 +27,11 @@ class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
     description = models.CharField(_("Описание"), blank=True, default="", max_length=1000)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', verbose_name=_('Родитель'))
-    image = models.ImageField(upload_to=make_upload_path, blank=True, default="", verbose_name=_('Изображение'))
+    wall = ThumbnailerImageField(
+        upload_to=make_upload_path, blank=True, default="", verbose_name=_('Обложка'),
+        resize_source=dict(size=(2560, 0), crop='scale'),
+    )
+    image = ThumbnailerImageField(upload_to=make_upload_path, blank=True, default="", verbose_name=_('Изображение'))
 
     def get_filters(self):
         return FilterCategory.objects.filter(category=self).order_by('ordering')
@@ -45,7 +50,11 @@ class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
 class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
     description = models.CharField(_("Описание"), blank=True, default="", max_length=1000)
-    image = models.ImageField(upload_to=make_upload_path, blank=True, default="", verbose_name=_('Изображение'))
+    wall = ThumbnailerImageField(
+        upload_to=make_upload_path, blank=True, default="", verbose_name=_('Обложка'),
+        resize_source=dict(size=(2560, 2560), crop='scale'),
+    )
+    image = ThumbnailerImageField(upload_to=make_upload_path, blank=True, default="", verbose_name=_('Изображение'))
     #TODO ManyToMany category
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories', blank=True, null=True, verbose_name=_('Тематика'))
     price = models.DecimalField(max_digits=8, decimal_places=2, null=True, default=0.00, verbose_name=_('Price'))
