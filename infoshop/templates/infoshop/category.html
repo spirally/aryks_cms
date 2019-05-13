@@ -29,7 +29,7 @@
     <div class="container-fluid p-20">
         <div class="row">
             {% for p in products %}
-                <div class="oko-pcard-wrap" data-aos="flip-left" data-aos-duration="1200">
+                <div class="oko-pcard-wrap m-l-20 m-r-20 m-b-20" data-aos="flip-left" data-aos-duration="1200">
                     <a class="oko-pcard-link lazybg loaded-bg"
                        href="{% url 'infoshop:product_detail' p.slug %}" tabindex="0"
                        style="background-image: url({{ p.image|thumbnail_url:'product_list' }});">
