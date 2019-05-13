@@ -3,25 +3,13 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-import uuid
 from properties.models import ProductProperty, TypeProperty
 from filters.models import ProductFilter, FilterCategory
 from slugify import slugify
 from colorfield.fields import ColorField
 
 from slytools.utils.db import IsDeletedModel, IsDeletedRestoredModel
-from slytools.utils.web import WebPageMixin, OrderingMixin
-
-
-def make_upload_path(instance, filename, prefix=False):
-    """
-    Create unique name for image or file.
-    """
-    new_name = str(uuid.uuid1())
-    parts = filename.split('.')
-    f = parts[-1]
-    filename = new_name + '.' + f
-    return u"%s/%s" % (settings.SHOP_IMAGE_DIR, filename)
+from slytools.utils.web import WebPageMixin, OrderingMixin, make_upload_path
 
 
 class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
@@ -29,10 +17,10 @@ class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', verbose_name=_('Родитель'))
     wall = ThumbnailerImageField(
-        upload_to=make_upload_path, blank=True, default="", verbose_name=_('Обложка'),
+        upload_to=make_upload_path(field_name='wall'), blank=True, default="", verbose_name=_('Обложка'),
         resize_source=dict(size=(2560, 0), crop='scale'),
     )
-    image = ThumbnailerImageField(upload_to=make_upload_path, blank=True, default="", verbose_name=_('Изображение'))
+    image = ThumbnailerImageField(upload_to=make_upload_path(field_name='image'), blank=True, default="", verbose_name=_('Изображение'))
 
     def get_filters(self):
         return FilterCategory.objects.filter(category=self).order_by('ordering')
@@ -52,10 +40,10 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
     description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
     wall = ThumbnailerImageField(
-        upload_to=make_upload_path, blank=True, default="", verbose_name=_('Обложка'),
+        upload_to=make_upload_path(field_name='wall'), blank=True, default="", verbose_name=_('Обложка'),
         resize_source=dict(size=(2560, 2560), crop='scale'),
     )
-    image = ThumbnailerImageField(upload_to=make_upload_path, blank=True, default="", verbose_name=_('Изображение'))
+    image = ThumbnailerImageField(upload_to=make_upload_path(field_name='image'), blank=True, default="", verbose_name=_('Изображение'))
     #TODO ManyToMany category
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories', blank=True, null=True, verbose_name=_('Тематика'))
     price = models.DecimalField(max_digits=8, decimal_places=2, null=True, default=0.00, verbose_name=_('Price'))
@@ -85,9 +73,7 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
 
     def pic(self):
         if self.image:
-            return u'<img src="https://fabro.com.ua/media/%s" width="70"/>' % self.image
-            # thumb_u#
-            # return u'<img src="%s" width="70"/>' % thumb_url
+            return u'<img src="{}{}" width="100"/>'.format(settings.MEDIA_URL, self.image)
         else:
             return '(none)'
 
@@ -158,7 +144,7 @@ class Offer(OrderingMixin, IsDeletedModel):
 
 class Images(OrderingMixin):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', null=True, verbose_name=_('Инфопродукт'))
-    image = models.ImageField(upload_to=make_upload_path, blank=True, default="", verbose_name=_('Изображение'))
+    image = models.ImageField(upload_to=make_upload_path(id_field=True), blank=True, default="", verbose_name=_('Изображение'))
     name = models.CharField(_("Название"), default="", max_length=250)
 
     def __str__(self):
