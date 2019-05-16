@@ -5,26 +5,55 @@
 
 {% block content %}
 {#    {% thumbnail category.wall "2560" as wall %}#}
-    <div class="wall masked" style="background-image: url({{ MEDIA_URL }}{{ category.wall }})">
-        <div class="mask black-criss-cross"></div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-6 align-self-center text-center">
-                    <h1 class="wall-title text-white">{{ category.name }}</h1>
-                    <div class="h4 text-white m-t-20">{{ category.description }}</div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <div class="button-group m-t-30">
-                                {% for c in category_children %}
-                                    <a href="{% url 'infoshop:by_category' c.slug %}"
-                                       class="btn waves-effect waves-light btn-success">{{ c.menutitle }}</a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="wall wall-sm masked" style="background-image: url({{ MEDIA_URL }}{{ category.wall }})">
+                    <div class="mask "></div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 p-40">
+                <h1 class="">{{ category.name }}</h1>
+                <div class="m-t-20">{{ category.description }}</div>
+                <div class="oko-link-group m-t-30">
+                    {% for c in category_children %}
+                        <a href="{% url 'infoshop:by_category' c.slug %}"
+                           class="oko-link oko-link-category">{{ c.menutitle }}<sup class="label label-inverse">{{ c.num_products }}</sup></a>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="col-lg-2 col-md-6 p-40">
+                <div class="container-fluid">
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-8 oko-stripe" style="background-color: {{ category.color0 }};"></div>
+            <div class="col-3 oko-stripe" style="background-color: {{ category.color1 }};"></div>
+            <div class="col-1 oko-stripe" style="background-color: {{ category.color2 }};"></div>
+        </div>
+{#        <div class="wall wall-sm masked" style="background-image: url({{ MEDIA_URL }}{{ category.wall }})">#}
+{#            <div class="mask "></div>#}
+{#            <div class="container">#}
+{#                <div class="row justify-content-center">#}
+{#                    <div class="col-lg-8 col-md-6 align-self-center text-center">#}
+{#                        <h1 class="wall-title">{{ category.name }}</h1>#}
+{#                        <div class="h4 m-t-20">{{ category.description }}</div>#}
+{#                        <div class="row">#}
+{#                            <div class="col-md-12 text-center">#}
+{#                                <div class="button-group m-t-30">#}
+{#                                    {% for c in category_children %}#}
+{#                                        <a href="{% url 'infoshop:by_category' c.slug %}"#}
+{#                                           class="btn waves-effect waves-light btn-success">{{ c.menutitle }}</a>#}
+{#                                    {% endfor %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
     </div>
     <div class="container-fluid p-20">
         <div class="row">

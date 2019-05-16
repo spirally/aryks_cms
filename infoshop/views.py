@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -23,7 +24,8 @@ class ProductsByCategoryView(ListView):
         context['categories'] = Category.objects.all()
         category = Category.objects.get(slug=self.kwargs['category_slug'])
         context['category'] = category
-        context['category_children'] = category.get_children()
+        # context['category_children'] = category.get_children()
+        context['category_children'] = Category.objects.filter(parent=category).annotate(num_products=Count('products'))
         return context
 
 class CategoryView(DetailView):

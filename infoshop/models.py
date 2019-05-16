@@ -1,3 +1,6 @@
+from functools import partial
+import uuid
+
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
@@ -6,13 +9,35 @@ from django.utils.translation import ugettext_lazy as _
 from properties.models import ProductProperty, TypeProperty
 from filters.models import ProductFilter, FilterCategory
 from slugify import slugify
-from colorfield.fields import ColorField
 
 from slytools.utils.db import IsDeletedModel, IsDeletedRestoredModel
-from slytools.utils.web import WebPageMixin, OrderingMixin, make_upload_path
+from slytools.utils.web import WebPageMixin, OrderingMixin, ColorPaletteMixin
 
 
-class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
+def make_upload_path(field_name=None, id_field=None):
+    path = u'{app}/{model}'
+    if field_name:
+        path += u'/{field}'
+    if id_field:
+        path += u'/{id}'
+    path += u'/{file}'
+
+    def make_upload_path(instance, filename, prefix=False):
+        new_name = str(uuid.uuid1())
+        parts = filename.split('.')
+        f = parts[-1]
+        filename = new_name + '.' + f
+        return path.format(
+            app=instance._meta.app_label,
+            model=instance._meta.model_name,
+            field=field_name,
+            id=getattr(instance, id_field, 0) if id_field else 0,
+            file=filename,
+        )
+    return make_upload_path
+
+
+class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel, ColorPaletteMixin):
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
     description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', verbose_name=_('Родитель'))
@@ -28,6 +53,10 @@ class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.update_palette_by_image(field_name='wall')
+        super(Category, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name = _('Тематика')
         verbose_name_plural = _('Тематики')
@@ -36,7 +65,7 @@ class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
         order_insertion_by = ['name']
 
 
-class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
+class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel, ColorPaletteMixin):
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
     description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
     wall = ThumbnailerImageField(
@@ -45,16 +74,13 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
     )
     image = ThumbnailerImageField(upload_to=make_upload_path(field_name='image'), blank=True, default="", verbose_name=_('Изображение'))
     #TODO ManyToMany category
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories', blank=True, null=True, verbose_name=_('Тематика'))
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', blank=True, null=True, verbose_name=_('Тематика'))
     price = models.DecimalField(max_digits=8, decimal_places=2, null=True, default=0.00, verbose_name=_('Price'))
     promo = models.BooleanField(_('Промо'), default=False, help_text=_('Показывать продукт на главной странице'))
     type_video = models.BooleanField(default=False, verbose_name=_('Смотреть'))
     type_audio = models.BooleanField(default=False, verbose_name=_('Слушать'))
     type_book = models.BooleanField(default=False, verbose_name=_('Читать'))
     type_flow = models.BooleanField(default=False, verbose_name=_('Участвовать'))
-    color0 = ColorField(default='#333333')
-    color1 = ColorField(default='#333333')
-    color2 = ColorField(default='#333333')
 
     def get_filters(self):
         res = {}
@@ -79,27 +105,6 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel):
 
     pic.short_description = u'Большая картинка'
     pic.allow_tags = True
-
-    def update_palette_by_image(self):
-        def get_hex_color(rate, rgb):
-            return '#' + ''.join('%02X' % i for i in rgb)
-
-        if not self.image:
-            return
-
-        from haishoku.haishoku import Haishoku
-        try:
-            palette = Haishoku.getPalette(self.image.path)
-        except FileNotFoundError:
-            return
-
-        palette.reverse()
-        try:
-            self.color0 = get_hex_color(*palette.pop())
-            self.color1 = get_hex_color(*palette.pop())
-            self.color2 = get_hex_color(*palette.pop())
-        except IndexError:
-            return
 
     def save(self, *args, **kwargs):
         self.update_palette_by_image()

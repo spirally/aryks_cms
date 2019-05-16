@@ -1,4 +1,7 @@
 
+sup.label {
+  vertical-align: super;
+}
 
 .wall {
   min-height: 600px;
@@ -393,4 +396,29 @@
 
 .oko-pcard-__light .oko-pcard-price-val__default {
   color: rgba(0, 0, 0, 0.6);
+}
+
+.oko-link-group {
+
+  .oko-link {
+    margin-right: 1rem;
+    margin-bottom: .5rem;
+  }
+}
+
+.oko-link-category {
+  text-decoration: underline;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: $black;
+
+  .label {
+    margin-left: .5rem;
+    padding: 3px 5px 0 5px;
+  }
+}
+
+
+.oko-stripe {
+  min-height: .3rem;
 }
