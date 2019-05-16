@@ -13,6 +13,12 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 p-40">
+                <div class="pb-2">
+                    <a href="{% url 'infoshop:infoshop' %}" class="oko-link">Все курсы</a>&nbsp;/
+                    {% for c in category_parents %}
+                        &nbsp;<a href="{% url 'infoshop:by_category' c.slug %}" class="oko-link">{{ c.menutitle }}</a>&nbsp;/
+                    {% endfor %}
+                </div>
                 <h1 class="">{{ category.name }}</h1>
                 <div class="m-t-20">{{ category.description }}</div>
                 <div class="oko-link-group m-t-30">
