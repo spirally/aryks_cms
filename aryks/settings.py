@@ -231,6 +231,7 @@ THUMBNAIL_PROCESSORS = (
 THUMBNAIL_ALIASES = {
     '': {
         'wall': dict(size=(2560, 0), crop='scale'),
+        'wall_fhd': dict(size=(1920, 0), crop='scale'),
         'gallery_lg': dict(size=(1000, 1000), crop='scale'),
         'gallery_md': dict(size=(600, 600), crop='scale'),
         'gallery_sm': dict(size=(400, 400), crop='scale'),

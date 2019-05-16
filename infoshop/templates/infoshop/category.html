@@ -4,34 +4,28 @@
 {% block title %}{{ category.pagetitle }}{% endblock %}
 
 {% block content %}
-{#    {% thumbnail category.wall "2560" as wall %}#}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="wall wall-sm masked" style="background-image: url({{ MEDIA_URL }}{{ category.wall }})">
+            <div class="col-lg-4">
+                <div class="wall wall-sm masked" style="background-image: url({{ category.wall|thumbnail_url:'wall_fhd' }})">
                     <div class="mask "></div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 p-40">
-                <div class="pb-2">
-                    <a href="{% url 'infoshop:infoshop' %}" class="oko-link">Все курсы</a>&nbsp;/
-                    {% for c in category_parents %}
-                        &nbsp;<a href="{% url 'infoshop:by_category' c.slug %}" class="oko-link">{{ c.menutitle }}</a>&nbsp;/
-                    {% endfor %}
-                </div>
+            <div class="col-xl-6 col-lg-8 p-40">
+                {% include 'infoshop/tpl_breadcrumbs.html' %}
+
                 <h1 class="">{{ category.name }}</h1>
                 <div class="m-t-20">{{ category.description }}</div>
-                <div class="oko-link-group m-t-30">
-                    {% for c in category_children %}
-                        <a href="{% url 'infoshop:by_category' c.slug %}"
-                           class="oko-link oko-link-category">{{ c.menutitle }}<sup class="label label-inverse">{{ c.num_products }}</sup></a>
-                    {% endfor %}
-                </div>
-
-            </div>
-            <div class="col-lg-2 col-md-6 p-40">
-                <div class="container-fluid">
-                </div>
+                {% if category_children %}
+                    <div class="oko-link-group m-t-30">
+                        {% for c in category_children %}
+                            {% if c.num_products %}
+                            <a href="{% url 'infoshop:by_category' c.slug %}"
+                               class="oko-link oko-link-category">{{ c.menutitle }}<sup class="label label-inverse">{{ c.num_products }}</sup></a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="row">
@@ -61,56 +55,6 @@
 {#            </div>#}
 {#        </div>#}
     </div>
-    <div class="container-fluid p-20">
-        <div class="row">
-            {% for p in products %}
-                <div class="oko-pcard-wrap m-l-20 m-r-20 m-b-20" data-aos="flip-left" data-aos-duration="1200">
-                    <a class="oko-pcard-link lazybg loaded-bg"
-                       href="{% url 'infoshop:product_detail' p.slug %}" tabindex="0"
-                       style="background-image: url({{ p.image|thumbnail_url:'product_list' }});">
-                        <div class="oko-pcard-filter" style="background-image: linear-gradient(to bottom left, {{ p.color0 }} 0%, {{ p.color1 }} 50%, {{ p.color2 }} 100%);"></div>
-                        <div class="oko-pcard-content">
-                            <div class="oko-pcard-badges">
-                                <div class="oko-pcard-badge oko-pcard-badge__orange">Вернём 7%</div>
-
-                            </div>
-                            <div class="oko-pcard-title">
-                                {{ p.name }}
-                            </div>
-                            <div class="oko-pcard-desc">
-
-                                Приобретение недвижимости не всегда связано с тратой крупной суммы денег, общением с
-                                подозрительными, не внушающими доверия людьми, и трудными юридическими манипуляциями. Вы
-                                можете инвестировать в...
-                            </div>
-                        </div>
-                        <div class="oko-pcard-icons">
-                            <i class="icon-video-player oko-pcard-icon"></i>
-                            <i class="icon-open-book oko-pcard-icon"></i>
-                        </div>
-                    </a>
-                    <a href="#" class="oko-pcard-author" tabindex="0">
-                        <img src="{{ STATIC_URL }}tmp/joe-gardner-2.jpg" alt="Закхайм Наталья">
-                        <span class="oko-pcard-author-name">Закхайм Наталья</span>
-                    </a>
-                    <a href="{% url 'infoshop:by_category' p.category.slug %}" class="oko-pcard-theme" tabindex="0">{{ p.category.menutitle}}</a>
-                </div>
-
-            {% endfor %}
-
-            {#            {% for p in products %}#}
-            {#                <div class="col-md-3">#}
-            {#                    <div class="card card-shadow" data-aos="flip-left" data-aos-duration="1200">#}
-            {#                        <a href="{% url 'infoshop:product_detail' p.slug %}" class="img-ho"><img class="card-img-top" src="{{ p.image|thumbnail_url:'product_list' }}" alt="{{ p.pagetitle }}"></a>#}
-            {#                        <div class="card-body">#}
-            {#                            <h5 class="font-medium m-b-0">{{ p.name }}</h5>#}
-            {#                            {% if category_children %}<p class="m-b-0 font-14">{{ p.category.menutitle}}</p>{% endif %}#}
-            {#                        </div>#}
-            {#                    </div>#}
-            {#                </div>#}
-            {#            {% endfor %}#}
-            {##}
-        </div>
-    </div>
+    {% include 'infoshop/tpl_product_list.html' %}
 
 {% endblock content %}
