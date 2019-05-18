@@ -33,27 +33,6 @@
             <div class="col-3 oko-stripe" style="background-color: {{ category.color1 }};"></div>
             <div class="col-1 oko-stripe" style="background-color: {{ category.color2 }};"></div>
         </div>
-{#        <div class="wall wall-sm masked" style="background-image: url({{ MEDIA_URL }}{{ category.wall }})">#}
-{#            <div class="mask "></div>#}
-{#            <div class="container">#}
-{#                <div class="row justify-content-center">#}
-{#                    <div class="col-lg-8 col-md-6 align-self-center text-center">#}
-{#                        <h1 class="wall-title">{{ category.name }}</h1>#}
-{#                        <div class="h4 m-t-20">{{ category.description }}</div>#}
-{#                        <div class="row">#}
-{#                            <div class="col-md-12 text-center">#}
-{#                                <div class="button-group m-t-30">#}
-{#                                    {% for c in category_children %}#}
-{#                                        <a href="{% url 'infoshop:by_category' c.slug %}"#}
-{#                                           class="btn waves-effect waves-light btn-success">{{ c.menutitle }}</a>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
     </div>
     {% include 'infoshop/tpl_product_list.html' %}
 

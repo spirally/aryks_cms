@@ -2,6 +2,8 @@ from functools import partial
 import uuid
 
 from django.db import models
+from django.db.models import QuerySet
+from django.utils.functional import cached_property
 from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.conf import settings
@@ -65,7 +67,29 @@ class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel, C
         order_insertion_by = ['name']
 
 
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return QuerySet(self.model, using=self._db).select_related('type')
+
+
+class ProductType(models.Model):
+    name = models.CharField(max_length=250, verbose_name=_('Название'))
+    genitive = models.CharField(max_length=250, null=True, verbose_name=_('Родительный падеж'))
+    dative = models.CharField(max_length=250, null=True, verbose_name=_('Дательный падеж'))
+    accusative = models.CharField(max_length=250, null=True, verbose_name=_('Винительный падеж'))
+    ablative = models.CharField(max_length=250, null=True, verbose_name=_('Творительный падеж'))
+    prepositional = models.CharField(max_length=250, null=True, verbose_name=_('Предложный падеж'))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Тип инфопродукта')
+        verbose_name_plural = _('Типы инфопродуктов')
+
+
 class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel, ColorPaletteMixin):
+    type = models.ForeignKey(ProductType, on_delete=models.CASCADE, null=True, verbose_name=_('Тип инфопродукта'))
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
     description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
     wall = ThumbnailerImageField(
@@ -75,12 +99,26 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel, ColorPaletteM
     image = ThumbnailerImageField(upload_to=make_upload_path(field_name='image'), blank=True, default="", verbose_name=_('Изображение'))
     #TODO ManyToMany category
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', blank=True, null=True, verbose_name=_('Тематика'))
-    price = models.DecimalField(max_digits=8, decimal_places=2, null=True, default=0.00, verbose_name=_('Price'))
+    forfree = models.BooleanField(default=False, verbose_name=_('Бесплатно'))
+    price = models.PositiveIntegerField(null=True, default=0, verbose_name=_('Стоимость'))
     promo = models.BooleanField(_('Промо'), default=False, help_text=_('Показывать продукт на главной странице'))
-    type_video = models.BooleanField(default=False, verbose_name=_('Смотреть'))
-    type_audio = models.BooleanField(default=False, verbose_name=_('Слушать'))
-    type_book = models.BooleanField(default=False, verbose_name=_('Читать'))
-    type_flow = models.BooleanField(default=False, verbose_name=_('Участвовать'))
+    media_type_video = models.BooleanField(default=False, verbose_name=_('Смотреть'))
+    media_type_audio = models.BooleanField(default=False, verbose_name=_('Слушать'))
+    media_type_book = models.BooleanField(default=False, verbose_name=_('Читать'))
+    media_type_flow = models.BooleanField(default=False, verbose_name=_('Участвовать'))
+
+    objects = ProductManager()
+
+    @cached_property
+    def longname(self):
+        if self.type:
+            return '{} «{}»'.format(self.type.name, self.name)
+        else:
+            return self.name
+
+    @cached_property
+    def pagetitle(self):
+        return self.title or self.longname
 
     def get_filters(self):
         res = {}
@@ -137,7 +175,7 @@ class Offer(OrderingMixin, IsDeletedModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='offers', null=True, verbose_name=_('Инфопродукт'))
     name = models.CharField(_("Название"), default="", max_length=250)
     description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
-    price = models.DecimalField(max_digits=8, decimal_places=2, null=True, default=0.00, verbose_name=_('Цена'))
+    price = models.PositiveIntegerField(null=True, default=0, verbose_name=_('Стоимость'))
 
     def __str__(self):
         return self.name

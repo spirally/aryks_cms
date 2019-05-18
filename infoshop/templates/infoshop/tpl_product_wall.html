@@ -1,0 +1,33 @@
+{% load thumbnail %}
+<div class="oko-pwall">
+    <div class="oko-pwall-wrap m-l-20 m-r-20 m-b-20" data-aos="flip-left" data-aos-duration="1200">
+        <div class="oko-pwall-link lazybg loaded-bg"
+           style="background-image: url({{ product.image|thumbnail_url:'product_list' }});">
+{#                            <div class="oko-pwall-filter" #}
+{#                                 style="background-image: linear-gradient(to bottom left, {{ product.color0 }} 0%, {{ product.color1 }} 50%, {{ product.color2 }} 100%);"#}
+{#                            ></div>#}
+            <div class="oko-pwall-content">
+                <div class="oko-pwall-badges">
+                    <div class="oko-pwall-badge oko-pwall-badge__orange">Вернём 7%</div>
+
+                </div>
+                <div class="oko-pwall-title-raw">
+                    <div class="oko-pwall-title-padding"></div>
+                    <div class="oko-pwall-title">
+                        <span>{{ product.name }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="oko-pwall-icons">
+                <i class="icon-video-player oko-pwall-icon"></i>
+                <i class="icon-open-book oko-pwall-icon"></i>
+            </div>
+        </div>
+{#                        <a href="#" class="oko-pwall-author" tabindex="0">#}
+{#                            <img src="{{ STATIC_URL }}tmp/joe-gardner-2.jpg" alt="Закхайм Наталья">#}
+{#                            <span class="oko-pwall-author-name">Закхайм Наталья</span>#}
+{#                        </a>#}
+        <div class="oko-pwall-type">{{ product.type.name }}</div>
+        <div class="oko-pwall-author">Закхайм Наталья</div>
+    </div>
+</div>

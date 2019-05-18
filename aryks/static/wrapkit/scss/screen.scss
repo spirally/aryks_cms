@@ -423,3 +423,297 @@ sup.label {
 .oko-stripe {
   min-height: .3rem;
 }
+
+
+
+.oko-pwall {
+  text-align: center;
+}
+
+.oko-pwall-wrap {
+  width: 320px;
+  height: 440px;
+  position: relative;
+  margin-bottom: 2rem;
+  text-align: left;
+  display: inline-block;
+  transition: all ease-out .5s;
+  transform: perspective(400px) rotate3d(1,10,-1, 12deg);
+  box-shadow: -20px -10px 20px rgba(#333, .25);
+
+  &:hover {
+    transform: perspective(400px) rotate3d(1,10,-1, 5deg);
+    box-shadow: 2px 2px 10px rgba(#333, .25);
+  }
+}
+
+.oko-pwall-link {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+}
+
+.oko-pwall-link:hover, .oko-pwall-link:active, .oko-pwall-link:focus {
+  color: #fff;
+}
+
+@media (min-width: 576px) {
+  .oko-pwall-link:hover .oko-pwall-content {
+    //top: 20px;
+  }
+  .oko-pwall-link:hover .oko-pwall-desc {
+    opacity: 1;
+  }
+  .oko-pwall-link:hover .oko-pwall-price {
+    opacity: 1;
+  }
+}
+
+.oko-pwall-filter {
+  background: #8FB100;
+  background: -moz-linear-gradient(-45deg, #8FB100 0%, #027F9D 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, #8FB100), color-stop(100%, #027F9D));
+  background: -webkit-linear-gradient(-45deg, #8FB100 0%, #027F9D 100%);
+  background: -o-linear-gradient(-45deg, #8FB100 0%, #027F9D 100%);
+  background: -ms-linear-gradient(-45deg, #8FB100 0%, #027F9D 100%);
+  background: linear-gradient(135deg, #8FB100 0%, #027F9D 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color1', endColorstr='$color2', GradientType=1);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: 0.4s;
+  opacity: 0.8;
+}
+
+.oko-pwall-link:hover .oko-pwall-filter {
+  opacity: 0.9;
+}
+
+.oko-pwall-content {
+  position: absolute;
+  top: 120px;
+  width: 100%;
+  transition: 0.4s;
+}
+
+.oko-pwall-badges {
+  position: relative;
+  left: -1px;
+  min-height: 30px;
+}
+
+.oko-pwall-badge {
+  padding: 7px 10px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  background: #333333;
+  border-radius: 0 5px 5px 0;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.oko-pwall-badge:last-child {
+  margin-bottom: 0;
+}
+
+.oko-pwall-badge__green {
+  background-color: #97BA02;
+}
+
+.oko-pwall-badge__orange {
+  background-color: #F5A000;
+}
+
+.oko-pwall-badge__yellow {
+  background-color: #FFDA44;
+  color: #000;
+  border-radius: 5px;
+  opacity: 1;
+  transition: 0.4s;
+}
+
+@media (min-width: 576px) {
+  .oko-pwall-link:hover .oko-pwall-badge__yellow {
+    opacity: 0;
+  }
+}
+
+.oko-pwall-title-raw {
+  margin-top: 20px;
+  display: flex;
+}
+
+.oko-pwall-title-padding {
+  width: 24px;
+  background-color: rgba($black, .5);
+}
+
+.oko-pwall-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 35px;
+  padding: 0 32px 0 0;
+
+  span {
+    padding: 3px;
+    line-height: 35px;
+    background-color: rgba($black, .5);
+  }
+}
+
+.oko-pwall-desc {
+  font-size: 12px;
+  padding: 0 22px;
+  margin-top: 16px;
+  opacity: 0;
+  transition: 0.4s;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.oko-pwall-price {
+  font-size: 12px;
+  color: #fff;
+  margin-top: 16px;
+  padding: 0 22px;
+  text-align: right;
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.oko-pwall-price-val {
+  font-size: 13px;
+  font-weight: bold;
+  color: #AEE32D;
+  margin-left: 10px;
+}
+
+.oko-pwall-price-val__default {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.oko-pwall-icons {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+}
+
+.oko-pwall-icon {
+  font-size: 36px;
+  margin-left: 5px;
+}
+
+.oko-pwall-author {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #FFDA44 !important;
+  position: absolute;
+  padding: 2px 20px 0 5px;
+  background-color: rgba($black, .5);
+  right: 0;
+  bottom: 20px;
+  //width: 35%;
+  text-align: right;
+}
+
+.oko-pwall-type {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #FFDA44 !important;
+  position: absolute;
+  padding: 2px 5px 0 20px;
+  background-color: rgba($black, .5);
+  left: 0;
+  top: 20px;
+  //width: 35%;
+  text-align: right;
+}
+
+.oko-pwall-theme__top {
+  bottom: inherit;
+  top: 70px;
+  opacity: 1;
+  transition: 0.4s;
+}
+
+@media (min-width: 576px) {
+  .oko-pwall-:hover .oko-pwall-theme__top {
+    opacity: 0;
+  }
+}
+
+.oko-pwall-place {
+  font-size: 11px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50%;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+  transition: 0.4s;
+}
+
+@media (min-width: 576px) {
+  .oko-pwall-:hover .oko-pwall-place {
+    opacity: 0;
+  }
+}
+
+.oko-pwall-counts {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #fff;
+  line-height: 24px;
+}
+
+.oko-pwall-counts i {
+  font-size: 14px;
+  margin-right: 2px;
+  width: 20px;
+  text-align: center;
+  display: inline-block;
+}
+
+.oko-pwall-__light .oko-pwall-link {
+  color: #000 !important;
+}
+
+.oko-pwall-__light .oko-pwall-author {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.oko-pwall-__light .oko-pwall-theme {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.oko-pwall-__light .oko-pwall-desc {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.oko-pwall-__light .oko-pwall-price {
+  color: #000;
+}
+
+.oko-pwall-__light .oko-pwall-price-val {
+  color: #000;
+}
+
+.oko-pwall-__light .oko-pwall-price-val__default {
+  color: rgba(0, 0, 0, 0.6);
+}

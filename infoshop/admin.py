@@ -1,5 +1,5 @@
 from django.contrib import admin
-from infoshop.models import Category, Product, Offer, Images
+from infoshop.models import Category, Product, Offer, Images, ProductType
 from mptt.admin import MPTTModelAdmin
 from properties.models import TypeProperty, ProductProperty
 from filters.models import FilterCategory, ProductFilter, FilterSelect
@@ -128,6 +128,7 @@ class ProductAdmin(admin.ModelAdmin):
         ('General', {
             'classes': ('suit-tab', 'suit-tab-general',),
             'fields': [
+                'type',
                 'name',
                 'slug',
                 'title',
@@ -136,12 +137,14 @@ class ProductAdmin(admin.ModelAdmin):
                 'description',
                 'wall',
                 'image',
-                'color0',
-                'color1',
-                'color2',
+                'media_type_video',
+                'media_type_audio',
+                'media_type_book',
+                'media_type_flow',
                 'url',
                 'seo_description',
                 'seo_keywords',
+                'forfree',
                 'price',
             ]
         }),
@@ -151,3 +154,8 @@ class ProductAdmin(admin.ModelAdmin):
         return {
             'slug': ('name',)
         }
+
+
+@admin.register(ProductType)
+class ProductTypeAdmin(admin.ModelAdmin):
+    pass

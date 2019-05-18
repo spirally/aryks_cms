@@ -36,7 +36,18 @@ class CatalogView(ProductsByCategoryView):
         return Product.objects.all()
 
 
-class CategoryView(DetailView):
-    model = Category
-    queryset = Category.objects.all()
-    template_name = 'infoshop/category.html'
+class ProductView(DetailView):
+    model = Product
+    template_name = 'infoshop/product.html'
+    context_object_name = 'product'
+
+    def get_object(self, queryset=None):
+        return Product.objects.get(slug=self.kwargs['slug'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_parents'] = self.object.category.get_ancestors(include_self=True)
+        offers = self.object.offers.all()
+        context['offers'] = offers
+        context['price'] = min([offer.price for offer in offers]) if offers else self.object.price
+        return context

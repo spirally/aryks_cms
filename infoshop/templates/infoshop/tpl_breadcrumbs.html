@@ -1,6 +1,5 @@
 {% if category_parents %}
-    <div class="pb-2">
-    {#    <a href="{% url 'infoshop:infoshop' %}" class="oko-link">Все курсы</a>&nbsp;/#}
+    <div class="py-2">
         {% for c in category_parents %}
             &nbsp;<a href="{% url 'infoshop:by_category' c.slug %}" class="oko-link">{{ c.menutitle }}</a>&nbsp;/
         {% endfor %}

@@ -5,7 +5,10 @@
         <title>{% block title %}This is my new project home page{% endblock title %}</title>
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <!-- Bootstrap Core CSS -->
-        <link href="{{ STATIC_URL }}assets/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+{#        <link href="{{ STATIC_URL }}assets/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">#}
+        <link href="{{ STATIC_URL }}assets/node_modules/bootstrap/css/bootstrap-reboot.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}assets/node_modules/bootstrap/css/bootstrap-grid.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}assets/node_modules/bootstrap/css/bootstrap.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="{{ STATIC_URL }}wrapkit/css/style.css" rel="stylesheet">
@@ -32,14 +35,14 @@
                 <div class="header6">
                     <div class="container-fluid p-l-20 p-r-20 po-relative bg-dark">
                         <nav class="navbar navbar-expand-lg h6-nav-bar">
-                            <a href="{% url 'pages-root' %}" class="navbar-brand"><img src="{{ STATIC_URL }}oko_online_w60.png" alt="oko.online" /></a>
+                            <a href="{% url 'pages-root' %}" class="navbar-brand"><img src="{{ STATIC_URL }}wikioko_w60.png" alt="oko.online" /></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#h6-info" aria-controls="h6-info" aria-expanded="false" aria-label="Toggle navigation"><span class="ti-menu"></span></button>
                             <div class="collapse navbar-collapse hover-dropdown font-14 ml-auto" id="h6-info">
                                 <ul class="navbar-nav ml-auto">
                                     {% show_menu 0 100 100 100 'menu/menu.html' %}
                                 </ul>
                                 <div class="act-buttons">
-                                    <a href="https://wrappixel.com/templates/wrapkit/" class="btn btn-success-gradiant font-14">Upgrade To Pro</a>
+                                    <a href="#" class="btn btn-danger-gradiant font-14">Войти</a>
                                 </div>
                             </div>
                         </nav>
