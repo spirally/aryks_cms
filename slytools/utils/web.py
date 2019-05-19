@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from colorfield.fields import ColorField
+from ckeditor.fields import RichTextField
 
 
 def make_upload_path(field_name=None, id_field=None):
@@ -36,7 +37,7 @@ class WebPageMixin(models.Model):
     url = models.CharField(_("Url"), default="", blank=True, max_length=300)
     seo_keywords = models.CharField(max_length=512, null=True, blank=True, verbose_name=_('SEO ключевые слова'))
     seo_description = models.TextField(max_length=512, null=True, blank=True, verbose_name=_('SEO описание'))
-    content = models.TextField(null=True, blank=True, verbose_name=_('Контент'))
+    content = RichTextField(null=True, blank=True, verbose_name=_('Контент'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Создано'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Обновлено'))
 

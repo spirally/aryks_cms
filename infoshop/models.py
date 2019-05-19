@@ -1,6 +1,7 @@
 from functools import partial
 import uuid
 
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.db.models import QuerySet
 from django.utils.functional import cached_property
@@ -106,6 +107,7 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel, ColorPaletteM
     media_type_audio = models.BooleanField(default=False, verbose_name=_('Слушать'))
     media_type_book = models.BooleanField(default=False, verbose_name=_('Читать'))
     media_type_flow = models.BooleanField(default=False, verbose_name=_('Участвовать'))
+    content_program = RichTextField(null=True, blank=True, verbose_name=_('Программа курса'))
 
     objects = ProductManager()
 

@@ -87,25 +87,35 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-xl-6">
+            <div class="col-xl-9">
                 <div class="card">
                     <div class="card-body p-b-0">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs customtab2" role="tablist">
-                            <li class="nav-item"> <a class="nav-link show" data-toggle="tab" href="#home7" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Home</span></a> </li>
-                            <li class="nav-item"> <a class="nav-link show active" data-toggle="tab" href="#profile7" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                            <li class="nav-item"> <a class="nav-link show" data-toggle="tab" href="#messages7" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Messages</span></a> </li>
+                            {% if product.content %}
+                            <li class="nav-item">
+                                <a class="nav-link show active" data-toggle="tab" href="#tab_about" role="tab" aria-selected="true">
+                                    <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">О {{ product.type.prepositional | lower }}</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if product.content_program %}
+                            <li class="nav-item">
+                                <a class="nav-link show" data-toggle="tab" href="#tab_program" role="tab" aria-selected="false">
+                                    <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Программа {{ product.type.genitive | lower }}</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link show" data-toggle="tab" href="#messages7" role="tab" aria-selected="false">
+                                    <span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Отзывы о {{ product.type.prepositional | lower }}</span><span class="label label-success ml-2">12</span>
+                                </a>
+                            </li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane show" id="home7" role="tabpanel">
-                                <div class="p-20">
-                                    <h3>Best Clean Tab ever</h3>
-                                    <h4>you can use it with the small code</h4>
-                                    <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
-                                </div>
-                            </div>
-                            <div class="tab-pane p-20 show active" id="profile7" role="tabpanel">2</div>
+                            {% if product.content %}<div class="tab-pane format-content p-20 show active" id="tab_about" role="tabpanel">{{ product.content | safe }}</div>{% endif %}
+                            {% if product.content_program %}<div class="tab-pane format-content p-20 show" id="tab_program" role="tabpanel">{{ product.content_program | safe }}</div>{% endif %}
                             <div class="tab-pane p-20 show" id="messages7" role="tabpanel">3</div>
                         </div>
                     </div>

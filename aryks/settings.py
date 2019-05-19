@@ -157,6 +157,7 @@ INSTALLED_APPS = [
     'djangocms_bootstrap4.contrib.bootstrap4_utilities',
     'aryks',
     'mptt',
+    'ckeditor',
     'colorfield',
     'infoshop',
     'properties',

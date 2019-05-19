@@ -3,6 +3,39 @@ h1 {
   font-weight: 700;
 }
 
+
+.format-content {
+  ul {
+    margin: 0px;
+    padding: 0px;
+    li {
+        list-style: none;
+        line-height: 30px;
+        margin: 5px 0;
+        transition: 0.2s ease-in;
+        &:before {
+            color: $success;
+            font: normal normal normal 22px/1 FontAwesome;
+            content: "\f058";
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        a {
+            color: $bodytext;
+            &:hover {
+                color: $themecolor;
+            }
+        }
+        i {
+            font-size: 13px;
+            padding-right: 8px;
+        }
+    }
+  }
+
+
+}
+
 sup.label {
   vertical-align: super;
 }

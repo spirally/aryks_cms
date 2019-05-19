@@ -820,12 +820,12 @@ Vertical tabs
             margin-right: 3px;
             color: $bodytext;
             &.active {
-                background: $themecolor;
+                background: $inverse;
                 color: $white;
             }
             &:hover {
                 color: $white;
-                background: $themecolor;
+                background: $secondary;
             }
         }
     }

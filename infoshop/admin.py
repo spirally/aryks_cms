@@ -1,9 +1,12 @@
 from django.contrib import admin
+from django import forms
 from infoshop.models import Category, Product, Offer, Images, ProductType
 from mptt.admin import MPTTModelAdmin
 from properties.models import TypeProperty, ProductProperty
 from filters.models import FilterCategory, ProductFilter, FilterSelect
-from django.forms import TextInput, ModelForm, Textarea, Select
+# from django.forms import TextInput, ModelForm, Textarea, Select
+# from ckeditor.widgets import CKEditorWidget
+from djangocms_text_ckeditor.widgets import TextEditorWidget
 
 
 class CategoryPropertyInline(admin.TabularInline):
@@ -34,7 +37,7 @@ class OfferInline(admin.TabularInline):
     suit_classes = 'suit-tab suit-tab-offers'
 
 
-class ProductFilterForm(ModelForm):
+class ProductFilterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProductFilterForm, self).__init__(*args, **kwargs)
         if self.instance:
@@ -106,8 +109,15 @@ class CategoryAdmin(MPTTModelAdmin):
         }
 
 
+# class ProductAdminForm(forms.ModelForm):
+#     content = forms.CharField(widget=TextEditorWidget())
+#     class Meta:
+#         model = Product
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    # form = ProductAdminForm
     inlines = [
         ProductPropertyInline,
         OfferInline,
@@ -146,6 +156,8 @@ class ProductAdmin(admin.ModelAdmin):
                 'seo_keywords',
                 'forfree',
                 'price',
+                'content',
+                'content_program',
             ]
         }),
     ]

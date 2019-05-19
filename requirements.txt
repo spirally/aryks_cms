@@ -24,3 +24,4 @@ pytz
 slugify
 haishoku #получение палитры изображений
 django-colorfield
+django-ckeditor
