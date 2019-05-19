@@ -101,7 +101,10 @@ class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel, ColorPaletteM
     #TODO ManyToMany category
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', blank=True, null=True, verbose_name=_('Тематика'))
     forfree = models.BooleanField(default=False, verbose_name=_('Бесплатно'))
+    new = models.BooleanField(default=False, verbose_name=_('Новинка'))
+    hit = models.BooleanField(default=False, verbose_name=_('Хит'))
     price = models.PositiveIntegerField(null=True, default=0, verbose_name=_('Стоимость'))
+    bonus = models.PositiveIntegerField(null=True, default=0, verbose_name=_('Бонус %'))
     promo = models.BooleanField(_('Промо'), default=False, help_text=_('Показывать продукт на главной странице'))
     media_type_video = models.BooleanField(default=False, verbose_name=_('Смотреть'))
     media_type_audio = models.BooleanField(default=False, verbose_name=_('Слушать'))

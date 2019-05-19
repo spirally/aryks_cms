@@ -155,7 +155,10 @@ class ProductAdmin(admin.ModelAdmin):
                 'seo_description',
                 'seo_keywords',
                 'forfree',
+                'new',
+                'hit',
                 'price',
+                'bonus',
                 'content',
                 'content_program',
             ]

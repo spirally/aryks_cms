@@ -1,38 +1,32 @@
 {% load thumbnail %}
 <div class="container-fluid p-20">
     <div class="row">
-        {% for p in products %}
-            <div class="oko-card">
+        {% for product in products %}
+            <div class="oko-pcard">
                 <div class="oko-pcard-wrap m-l-20 m-r-20 m-b-20" data-aos="flip-left" data-aos-duration="1200">
                     <a class="oko-pcard-link lazybg loaded-bg"
-                       href="{% url 'infoshop:product_detail' p.slug %}" tabindex="0"
-                       style="background-image: url({{ p.image|thumbnail_url:'product_list' }});">
-                        <div class="oko-pcard-filter" style="background-image: linear-gradient(to bottom left, {{ p.color0 }} 0%, {{ p.color1 }} 50%, {{ p.color2 }} 100%);"></div>
+                       href="{% url 'infoshop:product_detail' product.slug %}" tabindex="0"
+                       style="background-image: url({{ product.image|thumbnail_url:'product_list' }});">
+                        <div class="oko-pcard-filter" style="background-image: linear-gradient(to bottom left, {{ product.color0 }} 0%, {{ product.color1 }} 50%, {{ product.color2 }} 100%);"></div>
                         <div class="oko-pcard-content">
-                            <div class="oko-pcard-badges">
-                                <div class="oko-pcard-badge oko-pcard-badge__orange">Вернём 7%</div>
-
-                            </div>
+                            {% include 'infoshop/tpl_product_bages.html' %}
                             <div class="oko-pcard-title">
-                                {{ p.longname }}
+                                {{ product.longname }}
                             </div>
-                            <div class="oko-pcard-desc">
-
-                                Приобретение недвижимости не всегда связано с тратой крупной суммы денег, общением с
-                                подозрительными, не внушающими доверия людьми, и трудными юридическими манипуляциями. Вы
-                                можете инвестировать в...
-                            </div>
+                            <div class="oko-pcard-desc">{{ product.description }}</div>
                         </div>
                         <div class="oko-pcard-icons">
-                            <i class="icon-video-player oko-pcard-icon"></i>
-                            <i class="icon-open-book oko-pcard-icon"></i>
+                            {% if product.media_type_video %}<i class="oko-pcard-icon fa fa-film" title="Смотреть"></i>{% endif %}
+                            {% if product.media_type_audio %}<i class="oko-pcard-icon fa fa-headphones" title="Слушать"></i>{% endif %}
+                            {% if product.media_type_flow %}<i class="oko-pcard-icon fa fa-comments-o" title="Участвовать"></i>{% endif %}
+                            {% if product.media_type_book %}<i class="oko-pcard-icon fa fa-book" title="Читать"></i>{% endif %}
                         </div>
                     </a>
                     <a href="#" class="oko-pcard-author" tabindex="0">
                         <img src="{{ STATIC_URL }}tmp/joe-gardner-2.jpg" alt="Закхайм Наталья">
                         <span class="oko-pcard-author-name">Закхайм Наталья</span>
                     </a>
-                    <a href="{% url 'infoshop:by_category' p.category.slug %}" class="oko-pcard-theme" tabindex="0">{{ p.category.menutitle}}</a>
+                    <a href="{% url 'infoshop:by_category' product.category.slug %}" class="oko-pcard-theme" tabindex="0">{{ product.category.menutitle}}</a>
                 </div>
             </div>
         {% endfor %}

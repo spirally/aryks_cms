@@ -131,6 +131,49 @@ sup.label {
 
 .oko-pcard {
   text-align: center;
+  width: 100%;
+}
+
+@media (min-width: 648px) {
+  .oko-pcard {
+    width: 50%;
+  }
+}
+
+@media (min-width: 956px) {
+  .oko-pcard {
+    width: 33.33%;
+  }
+}
+
+@media (min-width: 1265px) {
+  .oko-pcard {
+    width: 25%;
+  }
+}
+
+@media (min-width: 1590px) {
+  .oko-pcard {
+    width: 20%;
+  }
+}
+
+@media (min-width: 1890px) {
+  .oko-pcard {
+    width: 16.66%;
+  }
+}
+
+@media (min-width: 2200px) {
+  .oko-pcard {
+    width: 14.28%;
+  }
+}
+
+@media (min-width: 2540px) {
+  .oko-pcard {
+    width: 12.5%;
+  }
 }
 
 .oko-pcard-wrap {
@@ -211,6 +254,7 @@ sup.label {
   position: relative;
   left: -1px;
   min-height: 30px;
+  display: inline-block;
 }
 
 .oko-pcard-badge {
@@ -219,10 +263,12 @@ sup.label {
   font-weight: bold;
   color: #fff;
   text-transform: uppercase;
-  background: #333333;
+  //background: #333333;
   border-radius: 0 5px 5px 0;
   display: inline-block;
   margin-bottom: 8px;
+  float: left;
+  clear: both;
 }
 
 .oko-pcard-badge:last-child {
@@ -354,7 +400,7 @@ sup.label {
   font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;
-  color: #FFDA44 !important;
+  color: $yellow !important;
   position: absolute;
   right: 20px;
   bottom: 20px;
@@ -446,7 +492,7 @@ sup.label {
     padding: 3px 5px 0 5px;
   }
 
-  .oko-link-group & {
+  .oko-link-group .oko-pcard {
     margin-right: 1rem;
     margin-bottom: .5rem;
   }
@@ -476,7 +522,7 @@ sup.label {
 
   &:hover {
     transform: perspective(400px) rotate3d(1,10,-1, 5deg);
-    box-shadow: 2px 2px 10px rgba(#333, .25);
+    box-shadow: -5px 2px 15px rgba(#333, .25);
   }
 }
 
@@ -559,22 +605,6 @@ sup.label {
 
 .oko-pwall-badge:last-child {
   margin-bottom: 0;
-}
-
-.oko-pwall-badge__green {
-  background-color: #97BA02;
-}
-
-.oko-pwall-badge__orange {
-  background-color: #F5A000;
-}
-
-.oko-pwall-badge__yellow {
-  background-color: #FFDA44;
-  color: #000;
-  border-radius: 5px;
-  opacity: 1;
-  transition: 0.4s;
 }
 
 @media (min-width: 576px) {
@@ -721,32 +751,4 @@ sup.label {
   width: 20px;
   text-align: center;
   display: inline-block;
-}
-
-.oko-pwall-__light .oko-pwall-link {
-  color: #000 !important;
-}
-
-.oko-pwall-__light .oko-pwall-author {
-  color: rgba(0, 0, 0, 0.8) !important;
-}
-
-.oko-pwall-__light .oko-pwall-theme {
-  color: rgba(0, 0, 0, 0.8) !important;
-}
-
-.oko-pwall-__light .oko-pwall-desc {
-  color: rgba(0, 0, 0, 0.6) !important;
-}
-
-.oko-pwall-__light .oko-pwall-price {
-  color: #000;
-}
-
-.oko-pwall-__light .oko-pwall-price-val {
-  color: #000;
-}
-
-.oko-pwall-__light .oko-pwall-price-val__default {
-  color: rgba(0, 0, 0, 0.6);
 }

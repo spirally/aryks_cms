@@ -1,0 +1,6 @@
+<div class="oko-pcard-badges">
+    {% if product.hit %}<div class="oko-pcard-badge bg-danger-gradiant">Хит</div>{% endif %}
+    {% if product.new %}<div class="oko-pcard-badge bg-info-gradiant">Новинка</div>{% endif %}
+    {% if product.forfree %}<div class="oko-pcard-badge bg-success-gradiant">Бесплатно</div>{% endif %}
+    {% if product.bonus %}<div class="oko-pcard-badge bg-yellow text-inverse">Вернём {{ product.bonus }}%</div>{% endif %}
+</div>
