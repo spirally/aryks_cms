@@ -29,11 +29,19 @@
                 <div class="container mt-4">
                     <div class="row po-relative">
                         <div class="col align-self-center">
-                        <div class="float-left mr-2">
-                            <img src="{{ STATIC_URL }}tmp/joe-gardner-2.jpg" alt="" width="120" height="120" class="circle img-fluid img-shadow">
-                        </div>
-                            <h3 class="m-t-30">Наталья Закхайм</h3>
-                            <h6 class="subtitle">Автор {{ product.type.genitive | lower }}</h6>
+                            {% if product.owner.type == 1 %}
+                                <div class="float-left mr-2">
+                                    <img src="{{ product.owner.image | thumbnail_url:'author_sm' }}" alt="" class="circle img-fluid img-shadow">
+                                </div>
+                                <h3 class="m-t-30">{{ product.owner.pagetitle }}</h3>
+                                <h6 class="subtitle">Автор {{ product.type.name_genitive | lower }}</h6>
+                            {% else %}
+                                <div class="float-left mr-2">
+                                    <img src="{{ product.owner.image | thumbnail_url:'logo_md' }}" alt="" class="img-fluid">
+                                </div>
+                                <h3 class="subtitle mt-4">Компания</h3>
+                                <h3 class="">{{ product.owner.pagetitle }}</h3>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -46,9 +54,9 @@
                     <div class="card-body">
                         {% if product.forfree %}
                             <div class="h3 my-3"><span class="h1 font-weight-bold text-success">Бесплатно</span></div>
-                            <p class="card-text">Вы сможете получить доступ к {{ product.type.dative }} сразу после регистрации на сайте.</p>
+                            <p class="card-text">Вы сможете получить доступ к {{ product.type.name_dative }} сразу после регистрации на сайте.</p>
                         {% elif offers %}
-                            <h3>Стоимость {{ product.type.genitive }}:</h3>
+                            <h3>Стоимость {{ product.type.name_genitive }}:</h3>
                             <div class="h3 my-3">от <span class="h1 font-weight-bold text-success">{{ price }}-</span></div>
                             <p class="card-text">Стоимость зависит от выбранного варианта участия.</p>
                             <h3 class="card-title">Варианты участия:</h3>
@@ -71,13 +79,13 @@
                                 {% endfor %}
                             </div>
                         {% else %}
-                            <h3>Стоимость {{ product.type.genitive }}:</h3>
-                            <p class="card-text">Оплата производится на сайте, после чего вы сможете получить доступ к {{ product.type.dative }}.</p>
+                            <h3>Стоимость {{ product.type.name_genitive }}:</h3>
+                            <p class="card-text">Оплата производится на сайте, после чего вы сможете получить доступ к {{ product.type.name_dative }}.</p>
                             <div class="h3 my-3"><span class="h1 font-weight-bold text-success">{{ price }}-</span></div>
                         {% endif %}
                         <div class="text-center">
                             <a class="btn btn-success-gradiant btn-md btn-arrow m-t-20" data-toggle="collapse" href="#f43">
-                                <span>{% if product.forfree %}Получить{% else %}Купить{% endif %} {{ product.type.accusative | lower }} <i class="ti-arrow-right"></i></span>
+                                <span>{% if product.forfree %}Получить{% else %}Купить{% endif %} {{ product.type.name_accusative | lower }} <i class="ti-arrow-right"></i></span>
                             </a>
                         </div>
                     </div>
@@ -95,14 +103,14 @@
                             {% if product.content %}
                             <li class="nav-item">
                                 <a class="nav-link show active" data-toggle="tab" href="#tab_about" role="tab" aria-selected="true">
-                                    <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">О {{ product.type.prepositional | lower }}</span>
+                                    <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">О {{ product.type.name_prepositional | lower }}</span>
                                 </a>
                             </li>
                             {% endif %}
                             {% if product.content_program %}
                             <li class="nav-item">
                                 <a class="nav-link show" data-toggle="tab" href="#tab_program" role="tab" aria-selected="false">
-                                    <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Программа {{ product.type.genitive | lower }}</span>
+                                    <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Программа {{ product.type.name_genitive | lower }}</span>
                                 </a>
                             </li>
                             {% endif %}

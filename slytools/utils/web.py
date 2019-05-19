@@ -100,3 +100,41 @@ class ColorPaletteMixin(models.Model):
 
     class Meta:
         abstract = True
+
+
+class NameCaseMixin(models.Model):
+    name_nominative = models.CharField(max_length=250, null=True, verbose_name=_('Именительный падеж'))
+    name_genitive = models.CharField(max_length=250, null=True, verbose_name=_('Родительный падеж'))
+    name_dative = models.CharField(max_length=250, null=True, verbose_name=_('Дательный падеж'))
+    name_accusative = models.CharField(max_length=250, null=True, verbose_name=_('Винительный падеж'))
+    name_ablative = models.CharField(max_length=250, null=True, verbose_name=_('Творительный падеж'))
+    name_prepositional = models.CharField(max_length=250, null=True, verbose_name=_('Предложный падеж'))
+
+    class Meta:
+        abstract = True
+
+
+class ContactsMixin(models.Model):
+    contact_website = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Официальный сайт'))
+    contact_partner_site = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Партнерская программа'))
+    contact_email = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Email'))
+    contact_post_address = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Почтовый адрес'))
+    contact_phone = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Контактный телефон'))
+    contact_skype = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Skype'))
+    contact_whatsapp = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('WhatsApp'))
+    contact_viber = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Viber'))
+    contact_telegram = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Telegram'))
+
+    class Meta:
+        abstract = True
+
+
+class SocialsMixin(models.Model):
+    social_youtube = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Канал на Youtube'))
+    social_vk = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Страница Вконтакте'))
+    social_fb = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Страница Facebook'))
+    social_instagram = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Страница Instagram'))
+    social_telegram = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Канал в Telegram'))
+
+    class Meta:
+        abstract = True

@@ -143,6 +143,7 @@ class ProductAdmin(admin.ModelAdmin):
                 'slug',
                 'title',
                 'title_menu',
+                'owner',
                 'category',
                 'description',
                 'wall',

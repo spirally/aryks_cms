@@ -9,12 +9,14 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+
+from authors.models import Owner
 from properties.models import ProductProperty, TypeProperty
 from filters.models import ProductFilter, FilterCategory
 from slugify import slugify
 
 from slytools.utils.db import IsDeletedModel, IsDeletedRestoredModel
-from slytools.utils.web import WebPageMixin, OrderingMixin, ColorPaletteMixin
+from slytools.utils.web import WebPageMixin, OrderingMixin, ColorPaletteMixin, NameCaseMixin
 
 
 def make_upload_path(field_name=None, id_field=None):
@@ -70,16 +72,11 @@ class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel, C
 
 class ProductManager(models.Manager):
     def get_queryset(self):
-        return QuerySet(self.model, using=self._db).select_related('type')
+        return QuerySet(self.model, using=self._db).select_related('type', 'owner')
 
 
-class ProductType(models.Model):
+class ProductType(NameCaseMixin):
     name = models.CharField(max_length=250, verbose_name=_('Название'))
-    genitive = models.CharField(max_length=250, null=True, verbose_name=_('Родительный падеж'))
-    dative = models.CharField(max_length=250, null=True, verbose_name=_('Дательный падеж'))
-    accusative = models.CharField(max_length=250, null=True, verbose_name=_('Винительный падеж'))
-    ablative = models.CharField(max_length=250, null=True, verbose_name=_('Творительный падеж'))
-    prepositional = models.CharField(max_length=250, null=True, verbose_name=_('Предложный падеж'))
 
     def __str__(self):
         return self.name
@@ -92,6 +89,7 @@ class ProductType(models.Model):
 class Product(WebPageMixin, OrderingMixin, IsDeletedRestoredModel, ColorPaletteMixin):
     type = models.ForeignKey(ProductType, on_delete=models.CASCADE, null=True, verbose_name=_('Тип инфопродукта'))
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, verbose_name=_('Автор'), null=True)
     description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
     wall = ThumbnailerImageField(
         upload_to=make_upload_path(field_name='wall'), blank=True, default="", verbose_name=_('Обложка'),
@@ -192,7 +190,7 @@ class Offer(OrderingMixin, IsDeletedModel):
 
 class Images(OrderingMixin):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', null=True, verbose_name=_('Инфопродукт'))
-    image = models.ImageField(upload_to=make_upload_path(id_field=True), blank=True, default="", verbose_name=_('Изображение'))
+    image = models.ImageField(upload_to=make_upload_path(), blank=True, default="", verbose_name=_('Изображение'))
     name = models.CharField(_("Название"), default="", max_length=250)
 
     def __str__(self):

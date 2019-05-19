@@ -6,7 +6,7 @@
                 <div class="oko-pcard-wrap m-l-20 m-r-20 m-b-20" data-aos="flip-left" data-aos-duration="1200">
                     <a class="oko-pcard-link lazybg loaded-bg"
                        href="{% url 'infoshop:product_detail' product.slug %}" tabindex="0"
-                       style="background-image: url({{ product.image|thumbnail_url:'product_list' }});">
+                       style="background-image: url({{ product.image | thumbnail_url:'product_list' }});">
                         <div class="oko-pcard-filter" style="background-image: linear-gradient(to bottom left, {{ product.color0 }} 0%, {{ product.color1 }} 50%, {{ product.color2 }} 100%);"></div>
                         <div class="oko-pcard-content">
                             {% include 'infoshop/tpl_product_bages.html' %}
@@ -23,8 +23,8 @@
                         </div>
                     </a>
                     <a href="#" class="oko-pcard-author" tabindex="0">
-                        <img src="{{ STATIC_URL }}tmp/joe-gardner-2.jpg" alt="Закхайм Наталья">
-                        <span class="oko-pcard-author-name">Закхайм Наталья</span>
+                        {% if product.owner.type == 1 %}<img src="{{ product.owner.image | thumbnail_url:'gallery_thumb' }}" alt="{{ product.owner.menutitle }}">{% endif %}
+                        <span class="oko-pcard-author-name">{{ product.owner.menutitle }}</span>
                     </a>
                     <a href="{% url 'infoshop:by_category' product.category.slug %}" class="oko-pcard-theme" tabindex="0">{{ product.category.menutitle}}</a>
                 </div>
