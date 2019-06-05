@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load cms_tags %}
+
+{% block title %}{% page_attribute "page_title" %}{% endblock title %}
+
+{% block content %}
+    <div class="bg-light">
+        <section>
+            <div id="banner2" class="banner spacer" style="background-image:url({{ STATIC_URL }}tmp/bg-laptop.jpg);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-lg-5 aos-init" data-aos="fade-up" data-aos-duration="1500">
+                            <h2 class="title text-white font-semibold text-uppercase">Стать партнером WikiOko</h2>
+                            <div class="bg-white">
+{#                                <div class="form-row b-b">#}
+{#                                    <div class="p-30 left b-r w-50">#}
+{#                                        <label class="text-inverse font-12 text-uppercase">First Name</label>#}
+{#                                        <input type="text" class="b-0 p-0 font-14 form-control" placeholder="Your First Name">#}
+{#                                    </div>#}
+{#                                    <div class="p-30 right w-50">#}
+{#                                        <label class="text-inverse font-12 text-uppercase">Last Name</label>#}
+{#                                        <input type="text" class="b-0 p-0 font-14 form-control" placeholder="Your Last Name">#}
+{#                                    </div>#}
+{#                                </div>#}
+                                <div class="form-row b-b p-30">
+                                    <label class="text-inverse font-12 text-uppercase">Имя</label>
+                                    <input type="text" class="b-0 p-0 font-14 form-control" placeholder="Напишите ваше имя">
+                                </div>
+                                <div class="form-row b-b p-30">
+                                    <label class="text-inverse font-12 text-uppercase">Email</label>
+                                    <input type="text" class="b-0 p-0 font-14 form-control" placeholder="Ваша электронная почта">
+                                </div>
+                                <div class="form-row b-b p-30">
+                                    <label class="text-inverse font-12 text-uppercase">Телефон</label>
+                                    <input type="text" class="b-0 p-0 font-14 form-control" placeholder="Укажите контактный телефон">
+                                </div>
+{#                                <div class="form-row b-b p-30 po-relative">#}
+{#                                    <label class="text-inverse font-12 text-uppercase">Booking Date</label>#}
+{#                                    <div class="input-group date">#}
+{#                                        <input type="text" class="b-0 p-0 font-14 form-control" id="dp" placeholder="Select the Appointment Date">#}
+{#                                        <label class="" for="dp"><i class="fa fa-calendar"></i></label>#}
+{#                                    </div>#}
+{#                                </div>#}
+                                <div class="form-row b-b p-30">
+                                    <label class="text-inverse font-12 text-uppercase">Комментарий</label>
+                                    <textarea class="b-0 font-light p-0 font-14 form-control" placeholder="Напишите всё, что считаете нужным"></textarea>
+                                </div>
+                                <div>
+                                    <button class="m-0 b-0 p-t-30 p-b-30 font-14 font-semibold bg-danger-gradiant btn btn-block btn-arrow text-center text-white text-uppercase">
+                                        <span>Подать заявку <i class="ti-arrow-right"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="container mt-5">
+	{% placeholder "content" %}
+    </div>
+{% endblock content %}

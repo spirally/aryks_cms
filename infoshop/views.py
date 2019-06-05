@@ -36,6 +36,13 @@ class CatalogView(ProductsByCategoryView):
         return Product.objects.all()
 
 
+class RegisterView(ProductsByCategoryView):
+    template_name = 'infoshop/register.html'
+
+    def get_queryset(self):
+        return Product.objects.all()
+
+
 class ProductView(DetailView):
     model = Product
     template_name = 'infoshop/product.html'
@@ -51,3 +58,5 @@ class ProductView(DetailView):
         context['offers'] = offers
         context['price'] = min([offer.price for offer in offers]) if offers else self.object.price
         return context
+
+

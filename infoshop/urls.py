@@ -17,4 +17,5 @@ urlpatterns = [
     # url(r'^(?P<slug>[_0-9a-zA-Z-]+)/$', views.CategoryView.as_view(), name='category'),
     url(r'^(?P<category_slug>[_0-9a-zA-Z-]+)/$', views.ProductsByCategoryView.as_view(), name='by_category'),
     url(r'^p/(?P<slug>[_0-9a-zA-Z-]+)/$', views.ProductView.as_view(), name='product_detail'),
+    url(r'^register/$', views.RegisterView.as_view(), name='register'),
 ]
