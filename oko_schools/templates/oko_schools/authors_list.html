@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+{% block title %}{{ category.pagetitle }}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="wall wall-sm masked" style="background-image: url({{ category.wall|thumbnail_url:'wall_fhd' }})">
+                    <div class="mask "></div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-8 p-40">
+                {% include 'infoshop/tpl_breadcrumbs.html' %}
+
+                <h1 class="">{{ category.name }}</h1>
+                <div class="m-t-20">{{ category.description }}</div>
+                {% if category_children %}
+                    <div class="oko-link-group m-t-30">
+                        {% for c in category_children %}
+                            {% if c.num_products %}
+                            <a href="{% url 'infoshop:by_category' c.slug %}"
+                               class="oko-link oko-link-category">{{ c.menutitle }}<sup class="label label-inverse">{{ c.num_products }}</sup></a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 oko-stripe" style="background-color: {{ category.color0 }};"></div>
+            <div class="col-3 oko-stripe" style="background-color: {{ category.color1 }};"></div>
+            <div class="col-1 oko-stripe" style="background-color: {{ category.color2 }};"></div>
+        </div>
+    </div>
+    Schools
+    {% include 'infoshop/tpl_product_list.html' %}
+
+{% endblock content %}

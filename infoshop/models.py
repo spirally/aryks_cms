@@ -10,7 +10,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from authors.models import Owner
+from oko_schools.models import Owner
 from properties.models import ProductProperty, TypeProperty
 from filters.models import ProductFilter, FilterCategory
 from slugify import slugify

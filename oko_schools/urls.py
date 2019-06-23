@@ -12,9 +12,9 @@ from . import views
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', views.AuthorView.as_view(), name='authors'),
+    url(r'^$', views.SchoolsView.as_view(), name='oko_schools'),
     # url(r'^(?P<category_slug>[_0-9a-zA-Z-]+)/(?P<slug>[_0-9a-zA-Z-]+)/$', views.ProductView.as_view(), name='product'),
     # url(r'^(?P<slug>[_0-9a-zA-Z-]+)/$', views.CategoryView.as_view(), name='category'),
-    url(r'^(?P<category_slug>[_0-9a-zA-Z-]+)/$', views.ProductsByCategoryView.as_view(), name='by_category'),
-    url(r'^o/(?P<slug>[_0-9a-zA-Z-]+)/$', views.ProductView.as_view(), name='owner_detail'),
+    url(r'^(?P<category_slug>[_0-9a-zA-Z-]+)/$', views.SchoolsByCategoryView.as_view(), name='schools_by_category'),
+    # url(r'^o/(?P<slug>[_0-9a-zA-Z-]+)/$', views.ProductView.as_view(), name='owner_detail'),
 ]

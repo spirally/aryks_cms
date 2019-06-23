@@ -31,12 +31,13 @@ def make_upload_path(field_name=None, id_field=None):
 
 
 class OwnerType(dict):
+    SCHOOL = 0
     AUTHOR = 1
-    SCHOOL = 2
+
 
 OWNER_TYPES = OwnerType({
-    OwnerType.AUTHOR: _(u"Автор"),
     OwnerType.SCHOOL: _(u"Школа"),
+    OwnerType.AUTHOR: _(u"Автор"),
 })
 
 
@@ -48,7 +49,7 @@ class Owner(WebPageMixin, ContactsMixin, SocialsMixin, IsDeletedModel):
     image = models.ImageField(upload_to=make_upload_path(field_name='image'), blank=True, default="", verbose_name=_('Изображение'))
     description = models.TextField(blank=True, verbose_name=_('Описание'))
     city = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Город'))
-    type = models.PositiveSmallIntegerField(choices=OWNER_TYPES.items(), editable=False, default=OwnerType.AUTHOR)
+    type = models.PositiveSmallIntegerField(choices=OWNER_TYPES.items(), editable=False, default=OwnerType.SCHOOL)
 
     def __str__(self):
         return self.name
@@ -63,15 +64,3 @@ class School(Owner):
     class Meta:
         verbose_name = _('Школа')
         verbose_name_plural = _('Школы')
-
-class Author(Owner, NameCaseMixin):
-    parent = models.ForeignKey(School, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_('Школа'))
-    education = models.CharField(max_length=500, null=True, blank=True, verbose_name=_('Образование'))
-
-    def save(self, *args, **kwargs):
-        self.type = OwnerType.AUTHOR
-        super(Author, self).save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = _('Автор')
-        verbose_name_plural = _('Авторы')
