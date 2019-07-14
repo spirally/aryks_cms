@@ -36,7 +36,7 @@ class AuthorsByCategoryView(ListView):
             return Category.objects.filter(parent__isnull=True).first()
 
     def get_queryset(self):
-        return Author.objects.filter(product__category__in=self.category.get_family()).annotate(num_products=Count('products'))
+        return Author.objects.filter(product__category__in=self.category.get_family()).annotate(num_products=Count('product'))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -44,13 +44,35 @@ def make_upload_path(field_name=None, id_field=None):
 
 class Category(MPTTModel, WebPageMixin, OrderingMixin, IsDeletedRestoredModel, ColorPaletteMixin):
     name = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название'))
+    name_authors = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название для авторов'))
+    name_schools = models.CharField(max_length=250, null=True, blank=True, verbose_name=_('Название для школ'))
     description = models.TextField(_("Описание"), blank=True, default="", max_length=1000)
+    description_authors = models.TextField(_("Описание для авторов"), blank=True, default="", max_length=1000)
+    description_schools = models.TextField(_("Описание для школ"), blank=True, default="", max_length=1000)
+    title_menu_authors = models.CharField(max_length=100, null=True, blank=True, verbose_name=_('Название меню для авторов'))
+    title_menu_schools = models.CharField(max_length=100, null=True, blank=True, verbose_name=_('Название меню для школ'))
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', verbose_name=_('Родитель'))
     wall = ThumbnailerImageField(
         upload_to=make_upload_path(field_name='wall'), blank=True, default="", verbose_name=_('Обложка'),
         resize_source=dict(size=(2560, 0), crop='scale'),
     )
     image = ThumbnailerImageField(upload_to=make_upload_path(field_name='image'), blank=True, default="", verbose_name=_('Изображение'))
+
+    @cached_property
+    def pagetitle_authors(self):
+        return self.name_authors or self.pagetitle
+
+    @cached_property
+    def pagetitle_schools(self):
+        return self.name_schools or self.pagetitle
+
+    @cached_property
+    def menutitle_authors(self):
+        return self.title_menu_authors or self.menutitle
+
+    @cached_property
+    def menutitle_schools(self):
+        return self.title_menu_schools or self.menutitle
 
     def get_filters(self):
         return FilterCategory.objects.filter(category=self).order_by('ordering')

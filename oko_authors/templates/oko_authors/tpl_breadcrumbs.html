@@ -1,0 +1,7 @@
+{% if category_parents %}
+    <div class="py-2">
+        {% for c in category_parents %}
+            &nbsp;<a href="{% url 'oko_authors:by_category' c.slug %}" class="oko-link">{{ c.menutitle_authors }}</a>&nbsp;/
+        {% endfor %}
+    </div>
+{% endif %}

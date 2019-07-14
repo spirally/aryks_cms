@@ -1,0 +1,27 @@
+{% load thumbnail %}
+<div class="container-fluid p-20">
+    <div class="row">
+        {% for owner in owners %}
+            <div class="oko-acard">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="{{ owner.image | thumbnail_url:'author_md' }}" alt="{{ owner.menu_title }}" class="img-responsive">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="p-t-10">
+                            <a href="{% url 'oko_authors:detail' owner.slug %}" class="h5 title font-medium">{{ owner.name }}</a>
+{#                            <h6 class="subtitle">Property Specialist</h6>#}
+                            <p>{{ owner.description }}</p>
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-behance"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

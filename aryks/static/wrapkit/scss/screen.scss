@@ -498,12 +498,31 @@ sup.label {
   }
 }
 
+.oko-link-category {
+  margin-right: 1rem;
+}
 
 .oko-stripe {
   min-height: .3rem;
 }
 
 
+.oko-icon-contact {
+  width: 1.4rem;
+  font-size: 20px;
+  display: inline-block;
+}
+
+.oko-accent-rotate {
+  transition: all ease-out .5s;
+  transform: perspective(400px) rotate3d(1,10,-1, 12deg);
+  box-shadow: -20px -10px 20px rgba(#333, .25);
+
+  &:hover {
+    transform: perspective(400px) rotate3d(1,10,-1, 5deg);
+    box-shadow: -5px 2px 15px rgba(#333, .25);
+  }
+}
 
 .oko-pwall {
   text-align: center;
@@ -516,14 +535,6 @@ sup.label {
   margin-bottom: 2rem;
   text-align: left;
   display: inline-block;
-  transition: all ease-out .5s;
-  transform: perspective(400px) rotate3d(1,10,-1, 12deg);
-  box-shadow: -20px -10px 20px rgba(#333, .25);
-
-  &:hover {
-    transform: perspective(400px) rotate3d(1,10,-1, 5deg);
-    box-shadow: -5px 2px 15px rgba(#333, .25);
-  }
 }
 
 .oko-pwall-link {
@@ -751,4 +762,54 @@ sup.label {
   width: 20px;
   text-align: center;
   display: inline-block;
+}
+
+///////////
+//// Owners
+
+.oko-acard {
+  text-align: center;
+  width: 100%;
+}
+
+@media (min-width: 648px) {
+  .oko-acard {
+    width: 50%;
+  }
+}
+
+@media (min-width: 956px) {
+  .oko-acard {
+    width: 33.33%;
+  }
+}
+
+@media (min-width: 1265px) {
+  .oko-acard {
+    width: 25%;
+  }
+}
+
+@media (min-width: 1590px) {
+  .oko-acard {
+    width: 20%;
+  }
+}
+
+@media (min-width: 1890px) {
+  .oko-acard {
+    width: 16.66%;
+  }
+}
+
+@media (min-width: 2200px) {
+  .oko-acard {
+    width: 14.28%;
+  }
+}
+
+@media (min-width: 2540px) {
+  .oko-acard {
+    width: 12.5%;
+  }
 }

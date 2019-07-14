@@ -15,6 +15,6 @@ urlpatterns = [
     url(r'^$', views.AuthorsView.as_view(), name='oko_authors'),
     # url(r'^(?P<category_slug>[_0-9a-zA-Z-]+)/(?P<slug>[_0-9a-zA-Z-]+)/$', views.ProductView.as_view(), name='product'),
     # url(r'^(?P<slug>[_0-9a-zA-Z-]+)/$', views.CategoryView.as_view(), name='category'),
-    url(r'^(?P<category_slug>[_0-9a-zA-Z-]+)/$', views.AuthorsByCategoryView.as_view(), name='authors_by_category'),
-    # url(r'^o/(?P<slug>[_0-9a-zA-Z-]+)/$', views.ProductView.as_view(), name='owner_detail'),
+    url(r'^(?P<category_slug>[_0-9a-zA-Z-]+)/$', views.AuthorsByCategoryView.as_view(), name='by_category'),
+    url(r'^o/(?P<slug>[_0-9a-zA-Z-]+)/$', views.AuthorView.as_view(), name='detail'),
 ]
