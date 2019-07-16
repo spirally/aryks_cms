@@ -7,63 +7,6 @@ File: scss
 
 
 /******************* 
-Topbar
-*******************/ 
-
-.topbar {
-    padding: 0px;
-    transition: 0.2s ease-in;
-    width: 100%;
-    position: absolute;
-    z-index: 20;
-}
-
-/*******************
-Header 6
-*******************/
-.header6{ 
-    .navbar-toggler{
-        color:$white;
-    }
-    .navbar-brand{
-        line-height: 80px;
-    } 
-}
-.h6-nav-bar{
-    padding:0px;
-    .navbar-nav{
-        .nav-link{
-            padding: 35px 15px;
-            color:rgba(255, 255, 255, 0.5);
-        }
-        .nav-item:hover .nav-link, .nav-item.active .nav-link{
-            color:rgba(255, 255, 255, 1);
-        }
-    }
-    .act-buttons{
-        .btn{
-            margin: 10px 0 10px 10px;
-        }
-    }
-}
-
-@media(max-width:1023px) {
-    .h6-nav-bar{
-        .navbar-nav{
-            .nav-link{
-                padding: 15px 15px;
-            }
-        }
-        .act-buttons{
-            .btn{
-                margin: 10px 0 10px 0px;
-            }
-        }
-    }
-}
-
-
-/******************* 
 Main & Page wrapper
 *******************/
 

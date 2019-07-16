@@ -29,34 +29,9 @@
         <!-- Main wrapper - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <div id="main-wrapper">
-            <!-- ============================================================== -->
-            <!-- Top header  -->
-            <!-- ============================================================== -->
-            <div class=" btn-success-gradiant" id="top">
-{#            <div class="topbar" id="top">#}
-                <div class="header6">
-                    <div class="container-fluid p-l-20 p-r-20 po-relative bg-dark">
-                        <nav class="navbar navbar-expand-lg h6-nav-bar">
-                            <a href="{% url 'pages-root' %}" class="navbar-brand"><img src="{{ STATIC_URL }}wikioko_w60y.png" alt="oko.online" /></a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#h6-info" aria-controls="h6-info" aria-expanded="false" aria-label="Toggle navigation"><span class="ti-menu"></span></button>
-                            <div class="collapse navbar-collapse hover-dropdown font-14 ml-auto" id="h6-info">
-                                <ul class="navbar-nav ml-auto">
-                                    {% show_menu 0 100 100 100 'menu/menu.html' %}
-                                </ul>
-                                <div class="act-buttons">
-                                    <a href="#" class="btn btn-danger-gradiant font-14">Войти</a>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- Top header  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Page wrapper  -->
-            <!-- ============================================================== -->
+            {% block header %}
+            {% include 'tpl_header.html' %}
+            {% endblock header %}
             <div class="page-wrapper">
                 <!-- ============================================================== -->
                 <!-- Container fluid  -->

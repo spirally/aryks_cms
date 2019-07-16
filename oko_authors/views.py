@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.utils.functional import cached_property
 from django.views.generic import DetailView, ListView
 
-from oko_authors.models import Author, School
-from infoshop.models import Category
+from oko_authors.models import Author
+from infoshop.models import Category, Product
 
 
 class AuthorView(DetailView):
@@ -17,10 +17,10 @@ class AuthorView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['category_parents'] = self.object.category.get_ancestors(include_self=True)
-        offers = self.object.offers.all()
-        context['offers'] = offers
-        context['price'] = min([offer.price for offer in offers]) if offers else self.object.price
+        context['products'] = Product.objects.filter(owner=self.object)
+        # offers = self.object.offers.all()
+        # context['offers'] = offers
+        # context['price'] = min([offer.price for offer in offers]) if offers else self.object.price
         return context
 
 
@@ -51,4 +51,4 @@ class AuthorsByCategoryView(ListView):
 class AuthorsView(AuthorsByCategoryView):
 
     def get_queryset(self):
-        return Author.objects.all()
+        return Author.objects.all().annotate(num_products=Count('product'))

@@ -1,22 +1,24 @@
 {% load thumbnail %}
-<div class="container-fluid p-20">
+<div class="container-fluid p-20 bg-light">
     <div class="row">
         {% for owner in owners %}
             <div class="oko-acard">
                 <div class="row">
                     <div class="col-md-12">
-                        <img src="{{ owner.image | thumbnail_url:'author_md' }}" alt="{{ owner.menu_title }}" class="img-responsive">
+                        <a href="{% url 'oko_authors:detail' owner.slug %}"><img src="{{ owner.image | thumbnail_url:'author_md' }}" alt="{{ owner.menu_title }}" class="img-responsive img-shadow"></a>
                     </div>
                     <div class="col-md-12">
                         <div class="p-t-10">
-                            <a href="{% url 'oko_authors:detail' owner.slug %}" class="h5 title font-medium">{{ owner.name }}</a>
+                            <div class="my-2">
+                                <a href="{% url 'oko_authors:detail' owner.slug %}" class="h5 font-bold">{{ owner.name }}</a>
+                            </div>
 {#                            <h6 class="subtitle">Property Specialist</h6>#}
                             <p>{{ owner.description }}</p>
                             <ul class="list-inline">
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-behance"></i></a></li>
+                                <li class="list-inline-item" title="Курсы автора"><a href="{% url 'oko_authors:detail' owner.slug %}#courses"><i class="icon-Books-2"></i> {{ owner.num_products }}</a></li>
+                                <li class="list-inline-item" title="Комментарии"><a href="{% url 'oko_authors:detail' owner.slug %}#comments"><i class="icon-Speach-Bubble3"></i> 31</a></li>
+                                <li class="list-inline-item" title="Нравится"><a href="{% url 'oko_authors:detail' owner.slug %}#review"><i class="icon-Like"></i> 12</a></li>
+                                <li class="list-inline-item" title="Не нравится"><a href="{% url 'oko_authors:detail' owner.slug %}#review"><i class="icon-Unlike"></i> 3</a></li>
                             </ul>
                         </div>
                     </div>

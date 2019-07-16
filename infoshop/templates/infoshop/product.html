@@ -33,7 +33,7 @@
                                 <div class="float-left mr-2">
                                     <img src="{{ product.owner.image | thumbnail_url:'author_sm' }}" alt="" class="circle img-fluid img-shadow">
                                 </div>
-                                <h3 class="m-t-30">{{ product.owner.pagetitle }}</h3>
+                                <a href="{% url 'oko_authors:detail' product.owner.slug %}" class="m-t-30 d-inline-block h3">{{ product.owner.pagetitle }}</a>
                                 <h6 class="subtitle">Автор {{ product.type.name_genitive | lower }}</h6>
                             {% else %}
                                 <div class="float-left mr-2">
