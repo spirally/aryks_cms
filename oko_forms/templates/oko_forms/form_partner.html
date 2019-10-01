@@ -1,0 +1,46 @@
+<section class="bg-light" id="register">
+    <div id="banner2" class="banner spacer" style="background-image:url({{ STATIC_URL }}tmp/bg-laptop.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-lg-5" data-aos="fade-up" data-aos-duration="1500">
+                    <form action="{{ partner_form_url }}" method="post">
+                        {% csrf_token %}
+                        <h2 class="title text-white font-semibold text-uppercase">Стать партнером WikiOko</h2>
+                        <h3>{{ form.non_field_errors }}</h3>
+                        <div class="bg-white">
+                            <div class="form-row b-b p-30">
+                                <label for="id_name" class="text-inverse font-12 text-uppercase">Имя</label>
+                                {{ form.name.errors }}
+                                {{ form.name }}
+                                <input id="id_name" type="text" class="b-0 p-0 font-14 form-control" placeholder="Напишите ваше имя">
+                            </div>
+                            <div class="form-row b-b p-30">
+                                <label for="id_sender" class="text-inverse font-12 text-uppercase">Email</label>
+                                {{ form.sender.errors }}
+                                {{ form.sender }}
+                                <input id="id_sender" type="text" class="b-0 p-0 font-14 form-control" placeholder="Ваша электронная почта">
+                            </div>
+                            <div class="form-row b-b p-30">
+                                <label for="id_phone" class="text-inverse font-12 text-uppercase">Телефон</label>
+                                {{ form.phone.errors }}
+                                {{ form.phone }}
+                                <input id="id_phone" type="text" class="b-0 p-0 font-14 form-control" placeholder="Укажите контактный телефон">
+                            </div>
+                            <div class="form-row b-b p-30">
+                                <label for="id_message" class="text-inverse font-12 text-uppercase">Комментарий</label>
+                                {{ form.message.errors }}
+                                {{ form.message }}
+                                <textarea id="id_message" class="b-0 font-light p-0 font-14 form-control" placeholder="Напишите всё, что считаете нужным"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="m-0 b-0 p-t-30 p-b-30 font-14 font-semibold bg-danger-gradiant btn btn-block btn-arrow text-center text-white text-uppercase">
+                                    <span>Подать заявку <i class="ti-arrow-right"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

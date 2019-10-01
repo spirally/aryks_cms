@@ -98,6 +98,12 @@ TEMPLATES = [
 ]
 
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "infoshop.context_processors.partner_form_context_processor"
+)
+
+
 MIDDLEWARE = [
     'cms.middleware.utils.ApphookReloadMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -161,6 +167,7 @@ INSTALLED_APPS = [
     'colorfield',
     'oko_authors',
     'oko_schools',
+    'oko_forms',
     'infoshop',
     'properties',
     'filters',

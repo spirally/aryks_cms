@@ -7,6 +7,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.static import serve
 
+from oko_forms.views import partner_form_process
 from . import views
 
 admin.autodiscover()
